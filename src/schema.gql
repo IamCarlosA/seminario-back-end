@@ -1,0 +1,193 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type DetailsClass {
+  year: Float
+  milage: Float
+  size: String
+  suspension: Boolean
+  note: String
+  changes: String
+}
+
+type Brand {
+  _id: String
+  name: String
+}
+
+type Model {
+  _id: String
+  name: String
+}
+
+type CylindersCapacity {
+  _id: String
+  value: String
+}
+
+type Hub {
+  _id: String
+  name: String
+}
+
+type City {
+  _id: String
+  name: String
+}
+
+type Country {
+  _id: String
+  name: String
+  tax_name: String
+  tax: Float
+  currency: String
+  iso: String
+  deposit: Float
+  insurance: Float
+  deliveryPrice: Float
+}
+
+type FileClass {
+  name: String
+  url: String
+  size: Float
+  path: String
+  hash: String
+  ext: String
+  mimeType: String
+}
+
+type ImageFormatClass {
+  name: String
+  url: String
+  size: Float
+  path: String
+  hash: String
+  ext: String
+  mimeType: String
+  width: Float
+  height: Float
+}
+
+type ImageFormatsClass {
+  thumbnail: ImageFormatClass
+  small: ImageFormatClass
+}
+
+type ImageClass {
+  name: String
+  url: String
+  size: Float
+  path: String
+  hash: String
+  ext: String
+  mimeType: String
+  alternativeText: String
+  formats: ImageFormatsClass
+  width: Float
+  height: Float
+}
+
+type discountsClass {
+  _id: String
+  status: String
+  netValue: Float
+  percentageValue: Float
+  type: String
+  code: String
+  createdAt: DateTime
+  deactivatedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type statusHistoricClass {
+  status: String
+  updatedAt: DateTime
+  by: String
+}
+
+type SalePriceClass {
+  weeks: Float
+  paymentWeek: Float
+  interestRate: Float
+  capital: Float
+  interest: Float
+}
+
+type SalePriceContainerClass {
+  weeks52: SalePriceClass
+  weeks78: SalePriceClass
+  weeks104: SalePriceClass
+}
+
+type Vehicle {
+  _id: String!
+  visible: Boolean
+  brand: Brand
+  model: Model
+  cylindersCapacity: CylindersCapacity
+  suffix: String
+  purchaseDate: DateTime
+  color: String
+  secondaryColor: String
+  condition: String
+  purchaseCost: Float
+  rentPrice: Float
+  tankSize: Float
+  plate: String
+  brakeType: String
+  brakesCondition: String
+  engineSN: String
+  registrationCard: String
+  vehicleSN: String
+  maintenanceCost: Float
+  images: [ImageClass!]
+  internalId: String!
+  externalId: String
+  discounts: [discountsClass!]
+  insurancePrice: Float
+  score: Float
+  scoring: Float
+  details: DetailsClass
+  type: String
+  status: String
+  maintenanceColor: String
+  gpsStatus: String
+  statusHistoric: [statusHistoricClass!]
+  insurance: Boolean
+  deposit: Boolean
+  depositPrice: Float
+  forSale: Boolean
+  salePrices: SalePriceContainerClass
+  extraCost: Float
+  totalCost: Float
+  owner: String
+  hub: Hub
+  city: City
+  country: Country
+  creditTime: [Float!]
+  documents: FileClass
+  warranty: String
+  description: String
+  detail: String
+  factorKM: Float
+  confirmationKM: Boolean
+  blueBookPrice: Float
+  trackerGPSId: Float
+}
+
+type PaginatedVehicles {
+  pages: Float
+  page: Float
+  count: Float
+  data: [Vehicle!]
+}
+
+type Query {
+  getAll(limit: Int = 30, page: Int = 1, status: String, visible: Boolean, city: String, hub: String, sort: String, salePrices: [Float!], color: String, secondaryColor: String, brand: String, model: String, cylindersCapacity: String, country: String, search: String): PaginatedVehicles!
+}
